@@ -6,19 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My First three.js Project</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/6f8b16282b.js" crossorigin="anonymous"></script>
 </head>
-<body style="background-color:aquamarine;">
+<body>
+    <div class="dropdown-content" id="dropdown">
+      <a href="#" style="display:flex" id="button1">
+        <div style=" display: flex;
+        justify-content: space-between;">
+          <img src="../images/syringe.png" width="40px" height="40px" style="margin:auto"></img>
+          <p style="display:inline-block; margin-left: 10px">Stethoscope</p>
+        </div>
+      </a>
+      <a href="#" style="display:flex" id="button2">
+        <div style="display: flex;
+      
+        justify-content: space-between;">
+          <img src="../images/cvk.png" width="40px" height="40px" style="margin:auto"></img>
+          <p style="display:inline-block;margin-left: 10px ">Syringe</p>
+        </div>
+        </a>
+      <a href="#" id="button3" style="display:flex">
+        <div style="display: flex; justify-content: space-between;">
+          <img src="../images/bandage.png" width="40px" height="40px" style="margin:auto; "></img>
+          <p style="display:inline-block; margin-left: 10px">Bandage</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="card" id="card">
+      <img src="images/julebrus.jpg" alt="Avatar" style="width:100%" id="cardImage">
+      <div class="container">
+        <p><b>Date added:</b> 08.12.2022</p>
+        <p><b>Må rengjøres/skiftes:</b> 09.12.2022</p> 
+        <p><b>Må fjernes:</b> 01.09.2031</p> 
+
+        <hr class="rounded">
+        <img style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
+      </div>
+    </div>
+
+    <div class="card" style="display:none;" id="createCard">
+      <div class="container">
+        <h4>Choose image</h4>
+        <input type="file" accept="image/png, image/jpg, image/jpeg" id="cardImage">
+        <input type="text" placeholder="Date added">
+        <input type="text" placeholder="Date added">
+        <input type="text" placeholder="Date added">
+
+        <p><b>Må rengjøres/skiftes:</b> 09.12.2022</p> 
+        <p><b>Må fjernes:</b> 01.09.2031</p> 
+
+        <hr class="rounded">
+        <img style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
+      </div>
+    </div>
+
+
   <script type="importmap">
     {
         "imports": {
             "three": "./node_modules/three/build/three.module.js",
             "orbitControls":"./node_modules/three/examples/jsm/controls/OrbitControls.js",
-            "fbxLoader":"./node_modules/three/examples/jsm/loaders/OBJLoader.js"
+            "fbxLoader":"./node_modules/three/examples/jsm/loaders/OBJLoader.js",
+            "dragControls":"./node_modules/three/examples/jsm/controls/DragControls.js",
+            "css3drenderer":"./node_modules/three/examples/jsm/renderers/CSS3DRenderer.js"
         }
     }
 </script>
 
 <script type="module" src="./js/main.js"></script>
+
 
 </body>
 </html>
