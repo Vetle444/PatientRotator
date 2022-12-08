@@ -8,7 +8,7 @@ import { CSS3DRenderer, CSS3DObject } from "css3drenderer"
 
 let cards = {};
 
-const card = document.getElementById("card");
+const metaDataCard = document.getElementById("card");
 
 const dropdown = document.getElementById("dropdown");
 let pointerX;
@@ -106,24 +106,7 @@ loader.load(
 	}
 );
 
-const draggableCubeGeometry = new THREE.BoxGeometry(0.2,0.2,0.2);
-const draggableTexture = new THREE.MeshBasicMaterial({color: "red", transparent: true})
-const draggableCube = new THREE.Mesh(draggableCubeGeometry, draggableTexture);
-draggableCube.position.set(3,0 ,0)
-scene.add(draggableCube);
-
 const orbitControls = new OrbitControls(camera, renderer.domElement)
-const controls = new DragControls([ draggableCube ], camera, renderer.domElement);
-
-controls.addEventListener('dragstart', function (event) {
-    orbitControls.enabled = false;
-    event.object.material.opacity = 0.33;
-})
-
-controls.addEventListener('dragend', function (event) {
-    orbitControls.enabled = true;
-    event.object.material.opacity = 1;
-})
 
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
@@ -147,9 +130,6 @@ function render() {
 };
 
 function onPointerMove( event ) {
-
-	// calculate pointer position in normalized device coordinates
-	// (-1 to +1) for both components
 
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
@@ -206,24 +186,24 @@ function leftClickRaycast()
     const intersects = raycaster.intersectObjects( objectsToBeLeftClickRaycasted )
 
     if ( intersects.length > 0 ) {
-        if(hoveredSpriteObject != intersects[0].object)
-        {
-            
-        }
-        card.style.display = "block";
+        metaDataCard.style.display = "flex";
         
         if(selectedSpriteObject != null)
             selectedSpriteObject.material.opacity = 1;
 
         selectedSpriteObject = intersects[0].object;
         
-console.log(cards);
+        const card = cards[selectedSpriteObject.id];
 
-        document.getElementById("cardTypeImage").src = cards[selectedSpriteObject.id].imageTypePath;
+        document.getElementById("cardTypeImage").src = card.imageTypePath;
+        document.getElementById("cardImageValue").src = "data:image/png;base64," + card.imagebase64;
+        document.getElementById("whenInsertedValue").innerHTML = card.whenInserted.replace("T", " ");
+        document.getElementById("cleanOrChangeTimeValue").innerHTML = card.cleanOrChangeTime.replace("T", " ");
+        document.getElementById("whenToRemoveValue").innerHTML = card.removeTime.replace("T", " ");
 
     }
     else{
-        card.style.display = "none";
+        metaDataCard.style.display = "none";
         
         selectedSpriteObject = null;
     }
@@ -243,7 +223,7 @@ function rightClickRaycast()
            const point = intersects[0].point;
 
            dropdown.style.display = "block";
-           dropdown.style.right = (window.innerWidth - pointerX) - 160 + "px";
+           dropdown.style.right = (window.innerWidth - pointerX) - 170 + "px";
            dropdown.style.bottom = (window.innerHeight - pointerY) - 220 + "px";
 
            posToSetIndicator = point;
@@ -258,33 +238,67 @@ function rightClickRaycast()
 
 document.getElementById("button1").onclick = function()
 {
-    onClickedButton("syringe.png", "card1");
+    onClickedButton("../images/syringe.png");
 
     return false;
 }
 
 document.getElementById("button2").onclick = function()
 {
-    onClickedButton("cvk.png", "card2");
+    onClickedButton("../images/cvk.png");
 
     return false;
 }
 
 document.getElementById("button3").onclick = function()
 {
-    onClickedButton("bandage.png", "card3");
+    onClickedButton("../images/bandage.png");
 
     return false;
 }
 
-function onClickedButton( image, cardName ) {
-    loadSprite(image, posToSetIndicator, cardName)
+function onClickedButton( image ) {
+    displayCreateCard(image, posToSetIndicator)
 }
 
-
-function loadSprite ( image, position, cardName )
+function displayCreateCard(image, posToSetIndicator)
 {
-    const map = new THREE.TextureLoader().load("../images/" + image);
+    document.getElementById("createCard").style.display = "flex";
+    document.getElementById("createCardTypeImage").src = image;
+
+    document.getElementById("cardImageInput").
+    addEventListener('change', createBase64, false);
+
+    document.getElementById("doneButton").onclick = function() {
+        loadSprite(image, posToSetIndicator);
+        document.getElementById("createCard").style.display = "none";
+    }
+
+}
+
+let imagebase64Value;
+
+var createBase64 = function(evt)
+{
+    var files = evt.target.files;
+    var file = files[0];
+
+    if(files && file)
+    {
+        var reader = new FileReader();
+
+        reader.onload = function(readerevt) {
+            var binaryString = readerevt.target.result;
+            imagebase64Value = btoa(binaryString);
+        }
+
+        reader.readAsBinaryString(file);
+    }
+}
+
+function loadSprite ( image, position )
+{
+    const map = new THREE.TextureLoader().load(image);
     const material = new THREE.SpriteMaterial({map: map, transparent: true});
 
     const sprite = new THREE.Sprite(material);
@@ -299,8 +313,23 @@ function loadSprite ( image, position, cardName )
 
     objectsToBeLeftClickRaycasted.push(sprite);
 
-    cards[sprite.id] = { imagePath : "../images/julebrus.png",
-    imageTypePath: "../images/" + image};
+    const imagePath = document.getElementById("cardImageInput").src;
+    const cleanOrChangeTimeValue = document.getElementById("cleanOrChangeTimeInput").value;
+    const removeTimeValue = document.getElementById("removeTimeInput").value;
+    const whenInsertedValue = document.getElementById("insertedInput").value;
+
+
+    
+    cards[sprite.id] = { imagebase64: imagebase64Value,
+        imageTypePath: "../images/" + image,
+        cleanOrChangeTime: cleanOrChangeTimeValue,
+        removeTime: removeTimeValue,
+        whenInserted: whenInsertedValue
+      };
+
+    
+    
 }
+
 
 render();

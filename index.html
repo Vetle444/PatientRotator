@@ -33,32 +33,41 @@
       </a>
     </div>
 
-    <div class="card" id="card">
-      <img src="images/julebrus.jpg" alt="Avatar" style="width:100%" id="cardImage">
+    <div class="card" id="card" style="flex-direction: column; justify-content: space-evenly">
+      <img src="images/julebrus.jpg" alt="Avatar" style="width:100%" id="cardImageValue"></img>
       <div class="container">
-        <p><b>Date added:</b> 08.12.2022</p>
-        <p><b>Må rengjøres/skiftes:</b> 09.12.2022</p> 
-        <p><b>Må fjernes:</b> 01.09.2031</p> 
+        <div>
+          <b>When inserted:</b> <p id="whenInsertedValue" style="display:inline-block;">08.12.2022</p>
+        </div>
+        <div>
+            <b>When to clean/change:</b> <p id="cleanOrChangeTimeValue" style="display:inline-block">09.12.2022</p> 
+        </div>
+        <div>
+          <b>When to remove:</b> <p id="whenToRemoveValue" style="display:inline-block">01.09.2031</p> 
+        </div>
 
         <hr class="rounded">
         <img style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
       </div>
     </div>
 
-    <div class="card" style="display:none;" id="createCard">
-      <div class="container">
-        <h4>Choose image</h4>
-        <input type="file" accept="image/png, image/jpg, image/jpeg" id="cardImage">
-        <input type="text" placeholder="Date added">
-        <input type="text" placeholder="Date added">
-        <input type="text" placeholder="Date added">
+    <div class="card" id="createCard" style="flex-direction:column; justify-content: space-evenly; padding: 20px">
+          <div style="display:flex;">
+            <h2>Set metadata</h2> <button id="doneButton" style="display:inline-block; height: 20px; margin:auto; margin-left: 25%">Done</button>
+          </div>
+          <b for="cardImageInput">Attachment:</b>
+          <input id="cardImageInput" type="file" accept="image/png, image/jpg, image/jpeg">
+          <b>When inserted:</b>
+          <input id="insertedInput" type="datetime-local">
+          <b>When to clean/change:</b>
+          <input id="cleanOrChangeTimeInput" type="datetime-local" placeholder="Insert date and time">
+          <b>When to remove:</b>
+          <input id="removeTimeInput" type="datetime-local" placeholder="Insert date and time">
+      
 
-        <p><b>Må rengjøres/skiftes:</b> 09.12.2022</p> 
-        <p><b>Må fjernes:</b> 01.09.2031</p> 
+        <hr class="rounded" style="width: 100%">
 
-        <hr class="rounded">
-        <img style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
-      </div>
+        <img id="createCardTypeImage" style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png"></img> 
     </div>
 
 
