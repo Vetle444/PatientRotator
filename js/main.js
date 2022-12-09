@@ -39,7 +39,7 @@ scene.add( directionalLight2 );
 
 
 function createSkyboxStrings() {
-    const basePath = "../skybox/";
+    const basePath = "/skybox/";
     const fileType = ".png";
     const sides = ["Right", "Left", "Top", "Bottom", "Front", "Back"];
     const pathStrings = sides.map(side => {
