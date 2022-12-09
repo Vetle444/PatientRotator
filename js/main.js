@@ -27,8 +27,8 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 
 document.body.appendChild( renderer.domElement );
 
-const directionalLight = new THREE.DirectionalLight( new THREE.Color( 'white' ), 1 );
-const directionalLight2 = new THREE.DirectionalLight( new THREE.Color( 'white' ), 1 );
+const directionalLight = new THREE.DirectionalLight( new THREE.Color( 'rgb(233,229,229)' ), 1.3 );
+const directionalLight2 = new THREE.DirectionalLight( new THREE.Color( 'rgb(233,229,229)' ), 1.3 );
 
 directionalLight.position.set(5, 5, 5);
 directionalLight2.position.set(-5, -5, -5);
@@ -67,7 +67,7 @@ const skybox = new THREE.Mesh(skyboxGeo, skyboxMaterials);
 scene.add(skybox)
 
 
-const humanColor = new THREE.MeshPhongMaterial( { color: "rgb(122,170,208)" } );
+const humanColor = new THREE.MeshPhongMaterial( { color: "rgb(130, 180, 255)" } );
 let human;
 
 const loader = new OBJLoader();
@@ -201,6 +201,12 @@ function leftClickRaycast()
         document.getElementById("cleanOrChangeTimeValue").innerHTML = card.cleanOrChangeTime.replace("T", " ");
         document.getElementById("whenToRemoveValue").innerHTML = card.removeTime.replace("T", " ");
 
+        document.getElementById("remove").onclick = function () {
+            scene.remove(card.gameObject);
+            delete cards[card];
+            console.log(selectedSpriteObject);
+        }
+
     }
     else{
         metaDataCard.style.display = "none";
@@ -236,32 +242,60 @@ function rightClickRaycast()
     }
 }
 
-document.getElementById("button1").onclick = function()
+document.getElementById("stethoScope").onclick = function()
 {
-    onClickedButton("../images/syringe.png");
+    onClickedButton("../images/syringe.png", new THREE.Vector3(0.1, 0.1, 0.1));
 
     return false;
 }
 
-document.getElementById("button2").onclick = function()
+document.getElementById("cvk").onclick = function()
 {
-    onClickedButton("../images/cvk.png");
+    onClickedButton("../images/cvk.png", new THREE.Vector3(0.2, 0.2, 0.2));
 
     return false;
 }
 
-document.getElementById("button3").onclick = function()
+document.getElementById("bandage").onclick = function()
 {
-    onClickedButton("../images/bandage.png");
+    onClickedButton("../images/bandage.png", new THREE.Vector3(0.1, 0.1, 0.1));
 
     return false;
 }
 
-function onClickedButton( image ) {
-    displayCreateCard(image, posToSetIndicator)
+document.getElementById("bandage").onclick = function()
+{
+    onClickedButton("../images/bandage.png", new THREE.Vector3(0.1, 0.1, 0.1));
+
+    return false;
 }
 
-function displayCreateCard(image, posToSetIndicator)
+document.getElementById("bandage2").onclick = function()
+{
+    onClickedButton("../images/bandage2.png", new THREE.Vector3(0.1, 0.1, 0.1));
+
+    return false;
+}
+
+document.getElementById("catheter").onclick = function()
+{
+    onClickedButton("../images/catheter.png", new THREE.Vector3(0.2, 0.2, 0.2));
+
+    return false;
+}
+
+document.getElementById("wound").onclick = function()
+{
+    onClickedButton("../images/wound.png", new THREE.Vector3(0.2, 0.2, 0.2));
+
+    return false;
+}
+
+function onClickedButton( image, scale ) {
+    displayCreateCard(image, posToSetIndicator, scale)
+}
+
+function displayCreateCard(image, posToSetIndicator, scale)
 {
     document.getElementById("createCard").style.display = "flex";
     document.getElementById("createCardTypeImage").src = image;
@@ -270,7 +304,7 @@ function displayCreateCard(image, posToSetIndicator)
     addEventListener('change', createBase64, false);
 
     document.getElementById("doneButton").onclick = function() {
-        loadSprite(image, posToSetIndicator);
+        loadSprite(image, posToSetIndicator, scale);
         document.getElementById("createCard").style.display = "none";
     }
 
@@ -296,8 +330,9 @@ var createBase64 = function(evt)
     }
 }
 
-function loadSprite ( image, position )
+function loadSprite ( image, position, scale )
 {
+    console.log(scale);
     const map = new THREE.TextureLoader().load(image);
     const material = new THREE.SpriteMaterial({map: map, transparent: true});
 
@@ -305,7 +340,7 @@ function loadSprite ( image, position )
     scene.add( sprite );
 
     sprite.position.set(position.x, position.y, position.z);
-    sprite.scale.set(0.1, 0.1, 0.1);
+    sprite.scale.set(scale.x, scale.y, scale.z);
 
     var dir = new THREE.Vector3();
     dir.subVectors(camera.position, sprite.getWorldPosition(dir)).normalize();
@@ -324,7 +359,8 @@ function loadSprite ( image, position )
         imageTypePath: "../images/" + image,
         cleanOrChangeTime: cleanOrChangeTimeValue,
         removeTime: removeTimeValue,
-        whenInserted: whenInsertedValue
+        whenInserted: whenInsertedValue,
+        gameObject: sprite
       };
 
     

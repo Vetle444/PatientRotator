@@ -4,37 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First three.js Project</title>
+    <title>Hihi</title>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://kit.fontawesome.com/6f8b16282b.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="dropdown-content" id="dropdown">
-      <a href="#" style="display:flex" id="button1">
+      <a href="#" style="display:flex" id="stethoScope">
         <div style=" display: flex;
         justify-content: space-between;">
           <img src="../images/syringe.png" width="40px" height="40px" style="margin:auto"></img>
           <p style="display:inline-block; margin-left: 10px">Stethoscope</p>
         </div>
       </a>
-      <a href="#" style="display:flex" id="button2">
+      <a href="#" style="display:flex" id="cvk">
         <div style="display: flex;
       
         justify-content: space-between;">
           <img src="../images/cvk.png" width="40px" height="40px" style="margin:auto"></img>
-          <p style="display:inline-block;margin-left: 10px ">Syringe</p>
+          <p style="display:inline-block;margin-left: 10px ">Cvk</p>
         </div>
         </a>
-      <a href="#" id="button3" style="display:flex">
+      <a href="#" id="bandage" style="display:flex">
         <div style="display: flex; justify-content: space-between;">
           <img src="../images/bandage.png" width="40px" height="40px" style="margin:auto; "></img>
           <p style="display:inline-block; margin-left: 10px">Bandage</p>
         </div>
       </a>
+
+      <a href="#" id="bandage2" style="display:flex">
+        <div style="display: flex; justify-content: space-between;">
+          <img src="../images/bandage2.png" width="40px" height="40px" style="margin:auto; "></img>
+          <p style="display:inline-block; margin-left: 10px">White Bandage</p>
+        </div>
+      </a>
+
+      <a href="#" id="catheter" style="display:flex">
+        <div style="display: flex; justify-content: space-between;">
+          <img src="../images/catheter.png" width="40px" height="40px" style="max-width: 100%; max-height: 100%;"></img>
+          <p style="display:inline-block; margin-left: 10px">Catheter</p>
+        </div>
+      </a>
+
+
+      <a href="#" id="wound" style="display:flex">
+        <div style="display: flex; justify-content: space-between;">
+          <img src="../images/wound.png" width="40px" height="40px" style="max-width: 100%; max-height: 100%;"></img>
+          <p style="display:inline-block; margin-left: 10px">Wound</p>
+        </div>
+      </a>
+
     </div>
 
-    <div class="card" id="card" style="flex-direction: column; justify-content: space-evenly">
-      <img src="images/julebrus.jpg" alt="Avatar" style="width:100%" id="cardImageValue"></img>
+    <div class="card" id="card" style="display:flex; flex-direction: column; max-width: 25%">
+      <img src="images/julebrus.jpg" alt="Attachment"  id="cardImageValue"></img>
       <div class="container">
         <div>
           <b>When inserted:</b> <p id="whenInsertedValue" style="display:inline-block;">08.12.2022</p>
@@ -47,11 +70,17 @@
         </div>
 
         <hr class="rounded">
-        <img style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
+        <img style="position:relative;left: 35%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
+
+        <hr class="rounded">
+        <div class="remove" id="remove">
+          <i class="fa-solid fa-trash fa-2xl"></i>
+          <p style="display:inline-block">Remove</p>
+        </div>
       </div>
     </div>
 
-    <div class="card" id="createCard" style="flex-direction:column; justify-content: space-evenly; padding: 20px">
+    <div class="card" id="createCard" style="flex-direction:column; justify-content: space-evenly; padding: 20px; max-width: 25%">
           <div style="display:flex;">
             <h2>Set metadata</h2> <button id="doneButton" style="display:inline-block; height: 20px; margin:auto; margin-left: 25%">Done</button>
           </div>
@@ -67,7 +96,7 @@
 
         <hr class="rounded" style="width: 100%">
 
-        <img id="createCardTypeImage" style="position:relative;left: 40%" width="75px" height="75px" src="images/bandage.png"></img> 
+        <img id="createCardTypeImage" src="images/bandage.png" style="position:relative; left: 35%; width:25%; height: 25%"></img> 
     </div>
 
 

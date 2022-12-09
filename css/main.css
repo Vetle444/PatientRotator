@@ -58,3 +58,15 @@ canvas {
   .container {
     padding: 2px 16px;
   }
+
+.remove
+{
+    position:relative; 
+    left: 25%;
+    transition: 0.3s;
+}
+
+.remove:hover
+{
+  transform:scale(1.1)
+}
