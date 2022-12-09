@@ -39,7 +39,7 @@ scene.add( directionalLight2 );
 
 
 function createSkyboxStrings() {
-    const basePath = "/skybox/";
+    const basePath = "../skybox/";
     const fileType = ".png";
     const sides = ["Right", "Left", "Top", "Bottom", "Front", "Back"];
     const pathStrings = sides.map(side => {
@@ -440,7 +440,7 @@ function loadSprite ( image, position, scale )
 
     
     cards[sprite.id] = { imagebase64: imagebase64Value,
-        imageTypePath: "images/" + image,
+        imageTypePath: "../images/" + image,
         cleanOrChangeTime: cleanOrChangeTimeValue,
         removeTime: removeTimeValue,
         whenInserted: whenInsertedValue,
