@@ -440,7 +440,7 @@ function loadSprite ( image, position, scale )
 
     
     cards[sprite.id] = { imagebase64: imagebase64Value,
-        imageTypePath: "images/" + image,
+        imageTypePath: image,
         cleanOrChangeTime: cleanOrChangeTimeValue,
         removeTime: removeTimeValue,
         whenInserted: whenInsertedValue,
