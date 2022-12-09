@@ -5,6 +5,7 @@ import { MeshBasicMaterial } from "three";
 import { Color } from "three";
 import { DragControls } from "dragControls";
 import { CSS3DRenderer, CSS3DObject } from "css3drenderer"
+import { DirectionalLight } from "three";
 
 let cards = {};
 
@@ -68,15 +69,18 @@ scene.add(skybox)
 
 
 const humanColor = new THREE.MeshPhongMaterial( { color: "rgb(130, 180, 255)" } );
+let grownHuman;
+let youthHuman;
+let childHuman;
+
 let human;
 
 const loader = new OBJLoader();
-
 loader.load(
-	// resource URL
-	'geir.obj',
-	// called when resource is loaded
-	function ( object ) {
+    // resource URL
+    'geir.obj',
+    // called when resource is loaded
+    function ( object ) {
         object.scale.set(0.25, 0.25, 0.25)
         object.position.set(0, -2, 0);
         
@@ -87,24 +91,100 @@ loader.load(
                 }
             } );
 
-        human = object;
+        grownHuman = object;
 
-		scene.add( object );
+        human = grownHuman;
 
-	},
-	// called when loading is in progresses
-	function ( xhr ) {
+        scene.add( object );
 
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-        console.log(error);
-		console.log( 'An error happened' );
-
-	}
+    }
 );
+
+loader.load(
+    // resource URL
+    'ungdomgeir.obj',
+    // called when resource is loaded
+    function ( object ) {
+        object.scale.set(0.25, 0.25, 0.25)
+        object.position.set(0, -2, 0);
+        
+        object.traverse( function ( child ) {
+            if ( child instanceof THREE.Mesh ) {
+                child.material = humanColor;
+                }
+            } );
+
+        youthHuman = object;
+
+     //   scene.add( object );
+        
+
+    }
+);
+
+loader.load(
+    // resource URL
+    'babygeir.obj',
+    // called when resource is loaded
+    function ( object ) {
+        object.scale.set(0.25, 0.25, 0.25)
+        object.position.set(0, -2, 0);
+        
+        object.traverse( function ( child ) {
+            if ( child instanceof THREE.Mesh ) {
+                child.material = humanColor;
+                
+                }
+            } );
+
+        childHuman = object;
+
+       // scene.add( object );
+        
+
+    }
+);
+
+function reset()
+{
+    scene.clear();
+
+    scene.add(directionalLight);
+    scene.add(directionalLight2);
+    scene.add(skybox)
+
+    objectsToBeRightClickRaycasted = [];
+    objectsToBeLeftClickRaycasted = [];
+
+
+    human.traverse( function ( child ) {
+        if ( child instanceof THREE.Mesh ) {
+            objectsToBeRightClickRaycasted.push(child);
+
+            
+            }
+        } );
+
+    scene.add(human);
+}
+
+document.getElementById("grown").onclick = function() {
+    human = grownHuman;
+    
+    reset();
+}
+
+document.getElementById("youth").onclick = function() {
+    human = youthHuman;
+    
+    reset();
+}
+
+document.getElementById("child").onclick = function() {
+    human = childHuman;
+    
+    reset();
+}
 
 const orbitControls = new OrbitControls(camera, renderer.domElement)
 
@@ -204,7 +284,6 @@ function leftClickRaycast()
         document.getElementById("remove").onclick = function () {
             scene.remove(card.gameObject);
             delete cards[card];
-            console.log(selectedSpriteObject);
         }
 
     }
@@ -228,10 +307,21 @@ function rightClickRaycast()
            intersectedObject = intersects[ 0 ].object;
            const point = intersects[0].point;
 
-           dropdown.style.display = "block";
-           dropdown.style.right = (window.innerWidth - pointerX) - 170 + "px";
-           dropdown.style.bottom = (window.innerHeight - pointerY) - 220 + "px";
+            console.log(pointerY);
+            console.log(window.innerHeight);
 
+            
+            let offset = 0;
+            dropdown.style.display = "block";
+            if(pointerY < (window.innerHeight / 2)) 
+            {
+                offset = dropdown.offsetHeight; 
+                    console.log(dropdown.offsetHeight);
+            }
+            console.log(offset)
+
+           dropdown.style.right = (window.innerWidth - pointerX) - dropdown.offsetWidth + "px";
+           dropdown.style.bottom = (window.innerHeight - pointerY) - offset + "px";
            posToSetIndicator = point;
         }
     
@@ -244,7 +334,7 @@ function rightClickRaycast()
 
 document.getElementById("stethoScope").onclick = function()
 {
-    onClickedButton("../images/syringe.png", new THREE.Vector3(0.1, 0.1, 0.1));
+    onClickedButton("../images/veneflon.png", new THREE.Vector3(0.1, 0.1, 0.1));
 
     return false;
 }
@@ -263,16 +353,10 @@ document.getElementById("bandage").onclick = function()
     return false;
 }
 
-document.getElementById("bandage").onclick = function()
-{
-    onClickedButton("../images/bandage.png", new THREE.Vector3(0.1, 0.1, 0.1));
-
-    return false;
-}
 
 document.getElementById("bandage2").onclick = function()
 {
-    onClickedButton("../images/bandage2.png", new THREE.Vector3(0.1, 0.1, 0.1));
+    onClickedButton("../images/bandage2.png", new THREE.Vector3(0.1, 0.3, 0.1));
 
     return false;
 }

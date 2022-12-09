@@ -11,94 +11,105 @@
 <body>
     <div class="dropdown-content" id="dropdown">
       <a href="#" style="display:flex" id="stethoScope">
-        <div style=" display: flex;
-        justify-content: space-between;">
-          <img src="../images/syringe.png" width="40px" height="40px" style="margin:auto"></img>
-          <p style="display:inline-block; margin-left: 10px">Stethoscope</p>
+        <div class="center">
+          <img src="../images/veneflon.png" width="40px"></img>
+          <b style="display:inline-block; margin-left: 20px">Veneflon</b>
         </div>
       </a>
       <a href="#" style="display:flex" id="cvk">
-        <div style="display: flex;
-      
-        justify-content: space-between;">
-          <img src="../images/cvk.png" width="40px" height="40px" style="margin:auto"></img>
-          <p style="display:inline-block;margin-left: 10px ">Cvk</p>
+        <div class="center">
+          <img src="../images/cvk.png" width="40px"></img>
+          <b style="display:inline-block;margin-left: 20px ">Cvk</b>
         </div>
         </a>
       <a href="#" id="bandage" style="display:flex">
-        <div style="display: flex; justify-content: space-between;">
-          <img src="../images/bandage.png" width="40px" height="40px" style="margin:auto; "></img>
-          <p style="display:inline-block; margin-left: 10px">Bandage</p>
+        <div class="center">
+          <img src="../images/bandage.png" width="40px"></img>
+          <b style="display:inline-block; margin-left: 20px">Plaster</b>
         </div>
       </a>
 
       <a href="#" id="bandage2" style="display:flex">
-        <div style="display: flex; justify-content: space-between;">
-          <img src="../images/bandage2.png" width="40px" height="40px" style="margin:auto; "></img>
-          <p style="display:inline-block; margin-left: 10px">White Bandage</p>
+        <div class="center">
+          <img src="../images/bandage2.png" width="40px"></img>
+          <b style="display:inline-block; margin-left: 20px">Bandasje</b>
         </div>
       </a>
 
       <a href="#" id="catheter" style="display:flex">
-        <div style="display: flex; justify-content: space-between;">
-          <img src="../images/catheter.png" width="40px" height="40px" style="max-width: 100%; max-height: 100%;"></img>
-          <p style="display:inline-block; margin-left: 10px">Catheter</p>
+        <div class="center">
+          <img src="../images/catheter.png" width="40px"></img>
+          <b style="display:inline-block; margin-left: 20px">Kateter</b>
         </div>
       </a>
 
 
       <a href="#" id="wound" style="display:flex">
-        <div style="display: flex; justify-content: space-between;">
-          <img src="../images/wound.png" width="40px" height="40px" style="max-width: 100%; max-height: 100%;"></img>
-          <p style="display:inline-block; margin-left: 10px">Wound</p>
+        <div class="center">
+          <img src="../images/wound.png" width="40px" ></img>
+          <b style="display:inline-block; margin-left: 20px; text-align:center">Sår/utlsett</b>
         </div>
       </a>
 
     </div>
 
-    <div class="card" id="card" style="display:flex; flex-direction: column; max-width: 25%">
+    <div class="card" id="card" style="flex-direction: column; max-width: 25%">
       <img src="images/julebrus.jpg" alt="Attachment"  id="cardImageValue"></img>
       <div class="container">
         <div>
-          <b>When inserted:</b> <p id="whenInsertedValue" style="display:inline-block;">08.12.2022</p>
+          <b>Lagt til:</b> <p id="whenInsertedValue" style="display:inline-block;">08.12.2022</p>
         </div>
         <div>
-            <b>When to clean/change:</b> <p id="cleanOrChangeTimeValue" style="display:inline-block">09.12.2022</p> 
+            <b>Må skiftes/vedlikeholdes:</b> <p id="cleanOrChangeTimeValue" style="display:inline-block">09.12.2022</p> 
         </div>
         <div>
-          <b>When to remove:</b> <p id="whenToRemoveValue" style="display:inline-block">01.09.2031</p> 
+          <b>Må fjernes:</b> <p id="whenToRemoveValue" style="display:inline-block">01.09.2031</p> 
         </div>
 
         <hr class="rounded">
-        <img style="position:relative;left: 35%" width="75px" height="75px" src="images/bandage.png" id="cardTypeImage"></img> 
-
+        
+        <div class="center">
+          <img width="75px" src="images/bandage.png" id="cardTypeImage"></img> 
+        </div>
+        
         <hr class="rounded">
         <div class="remove" id="remove">
           <i class="fa-solid fa-trash fa-2xl"></i>
-          <p style="display:inline-block">Remove</p>
+          <p style="margin-left: 10px">Fjern</p>
         </div>
       </div>
     </div>
 
-    <div class="card" id="createCard" style="flex-direction:column; justify-content: space-evenly; padding: 20px; max-width: 25%">
+    <div class="card" id="createCard" style="flex-direction:column; justify-content: space; padding: 20px; max-width: 25%">
           <div style="display:flex;">
-            <h2>Set metadata</h2> <button id="doneButton" style="display:inline-block; height: 20px; margin:auto; margin-left: 25%">Done</button>
+            <h2>Sett metadata</h2> <button id="doneButton" style="display:inline-block; height: 20px; margin:auto; margin-left: 25%">Lagre</button>
           </div>
-          <b for="cardImageInput">Attachment:</b>
-          <input id="cardImageInput" type="file" accept="image/png, image/jpg, image/jpeg">
-          <b>When inserted:</b>
+          <b for="cardImageInput">Vedlegg:</b>
+          <input id="cardImageInput" type="file" accept="image/png, image/jpg, image/jpeg" placeholder="Velg" >
+          <b>Lagt til:</b>
           <input id="insertedInput" type="datetime-local">
-          <b>When to clean/change:</b>
+          <b>Må skiftes/vedlikeholdes:</b>
           <input id="cleanOrChangeTimeInput" type="datetime-local" placeholder="Insert date and time">
-          <b>When to remove:</b>
+          <b>Må fjernes:</b>
           <input id="removeTimeInput" type="datetime-local" placeholder="Insert date and time">
       
 
         <hr class="rounded" style="width: 100%">
 
-        <img id="createCardTypeImage" src="images/bandage.png" style="position:relative; left: 35%; width:25%; height: 25%"></img> 
+      <div class="center">
+        <img id="createCardTypeImage" style="width: 100px; height: auto; object-fit:cover" src="images/bandage.png"></img>
+      </div> 
     </div>
 
+
+    <div class="static-dropdown">
+      <button class="dropbtn">Velg menneske</button>
+      <div class="static-dropdown-content">
+        <a href="#" id="child">Barn</a>
+        <a href="#" id="youth">Ungdom</a>
+        <a href="#" id="grown">Voksen</a>
+      </div>
+    </div>
 
   <script type="importmap">
     {
