@@ -334,21 +334,21 @@ function rightClickRaycast()
 
 document.getElementById("stethoScope").onclick = function()
 {
-    onClickedButton("../images/veneflon.png", new THREE.Vector3(0.1, 0.1, 0.1));
+    onClickedButton("/images/veneflon.png", new THREE.Vector3(0.1, 0.1, 0.1));
 
     return false;
 }
 
 document.getElementById("cvk").onclick = function()
 {
-    onClickedButton("../images/cvk.png", new THREE.Vector3(0.2, 0.2, 0.2));
+    onClickedButton("/images/cvk.png", new THREE.Vector3(0.2, 0.2, 0.2));
 
     return false;
 }
 
 document.getElementById("bandage").onclick = function()
 {
-    onClickedButton("../images/bandage.png", new THREE.Vector3(0.1, 0.1, 0.1));
+    onClickedButton("/images/bandage.png", new THREE.Vector3(0.1, 0.1, 0.1));
 
     return false;
 }
@@ -356,21 +356,21 @@ document.getElementById("bandage").onclick = function()
 
 document.getElementById("bandage2").onclick = function()
 {
-    onClickedButton("../images/bandage2.png", new THREE.Vector3(0.1, 0.3, 0.1));
+    onClickedButton("/images/bandage2.png", new THREE.Vector3(0.1, 0.3, 0.1));
 
     return false;
 }
 
 document.getElementById("catheter").onclick = function()
 {
-    onClickedButton("../images/catheter.png", new THREE.Vector3(0.2, 0.2, 0.2));
+    onClickedButton("/images/catheter.png", new THREE.Vector3(0.2, 0.2, 0.2));
 
     return false;
 }
 
 document.getElementById("wound").onclick = function()
 {
-    onClickedButton("../images/wound.png", new THREE.Vector3(0.2, 0.2, 0.2));
+    onClickedButton("/images/wound.png", new THREE.Vector3(0.2, 0.2, 0.2));
 
     return false;
 }
@@ -440,7 +440,7 @@ function loadSprite ( image, position, scale )
 
     
     cards[sprite.id] = { imagebase64: imagebase64Value,
-        imageTypePath: "../images/" + image,
+        imageTypePath: "images/" + image,
         cleanOrChangeTime: cleanOrChangeTimeValue,
         removeTime: removeTimeValue,
         whenInserted: whenInsertedValue,
